@@ -1,0 +1,48 @@
+﻿@model List<MVCSepet.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-2">
+    @if (TempData["Error"] != null) { 
+        <div class="alert alert-danger">
+            <span>@TempData["Error"]</span>
+        </div>
+    }
+    else if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    <span>@TempData["Success"]</span>
+                </div>
+            }
+    @foreach (var product in Model)
+    {
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" class="card-img-top" alt="product-name">
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    @if (product.CategoryID != null)
+                    {
+                <div class="d-flex justify-content-between">
+                    <span class="card-text">@product.Category.CategoryName</span>
+                    <span>Stok: @product.UnitsInStock</span>
+                </div>
+                    }
+                    else
+                    {
+                <p class="card-text">Tanımsız</p>
+                    }
+                    <div class="d-flex justify-content-between">
+                        <h3>@product.UnitPrice.Value.ToString("C2")</h3>
+                        @*<a href="#" class="btn btn-primary">Sepete Ekle</a>*@
+                        @Html.ActionLink("Sepete Ekle", "AddToCart", new { id = product.ProductID }, new {@class="btn btn-primary"})
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    }
+</div>
+

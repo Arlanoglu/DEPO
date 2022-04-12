@@ -1,0 +1,40 @@
+﻿@model MVCLogin.Models.Entity.AppUser
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="col-md-6 mx-auto">
+    <form method="post">
+        <div class="mt-2">
+            @Html.LabelFor(x => x.Firstname)
+            @Html.ValidationMessageFor(x => x.Firstname)
+            @Html.TextBoxFor(x => x.Firstname, null, new { @class = "form-control" })
+
+        </div>
+        <div class="mt-2">
+            @Html.LabelFor(x => x.Lastname)
+            @Html.ValidationMessageFor(x => x.Lastname)
+            @Html.TextBoxFor(x => x.Lastname, null, new { @class = "form-control" })
+
+        </div>
+        <div class="mt-2">
+            @Html.LabelFor(x => x.Username)
+            @Html.ValidationMessageFor(x => x.Username)
+            @Html.TextBoxFor(x => x.Username, null, new { @class = "form-control" })
+
+        </div>
+        <div class="mt-2">
+            @Html.LabelFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Email)
+            @Html.TextBoxFor(x => x.Email, null, new { @class = "form-control",type="email" })
+
+        </div>
+        <div class="mt-2">
+            @Html.LabelFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.Password)
+            @Html.TextBoxFor(x => x.Password, null, new { @class = "form-control", type = "password" })
+
+        </div>
+        <button class="btn btn-primary">Register</button>
+    </form>
+</div>

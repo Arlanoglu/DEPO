@@ -1,0 +1,51 @@
+﻿@model MVCSepet.Models.Cart
+@{
+    ViewBag.Title = "MyCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal? totalPrice = 0;
+}
+
+ @if (Session["scart"] != null)
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ürün Adı</th>
+                            <th>Birim Fiyat</th>
+                            <th>Adet</th>
+                            <th>Ara Toplam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cart in Model.myCart)
+                        {
+                            totalPrice += cart.SubTotal;
+                            <tr>
+                                <td>@cart.Name</td>
+                                <td>@cart.Price</td>
+                                <td>@cart.Quantity</td>
+                                <td>@cart.SubTotal.Value.ToString("C2")</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4">
+                                <div class="d-flex justify-content-between">
+                                    <h3>Genel Toplam: @totalPrice.Value.ToString("C2")</h3>
+                                    @Html.ActionLink("Siparişi Tamamla", "CompleteCart", null, new { @class="btn btn-success"})
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+ }
+ else
+ {
+     <div class="text-center mx-auto">
+         <div class="alert alert-warning">
+             <span>
+                 Sepetinizde herhangi bir ürün mevcut değil <a href="/Home/Index">buradan</a> alışverişe devam edebilirsiniz.
+             </span>
+         </div>
+     </div>
+ }
+
